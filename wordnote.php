@@ -41,7 +41,7 @@ if ($_POST['note']) {
 	    			$.ajax({
 						type: "POST",
 						url: "/WordNote/wp-content/plugins/wordnote/wordnote.php",
-						data: { note: note }
+						data: { note: note + ' ' }
 					}).done(function( msg ) {
 						$("#wordnote-submit").html('Saved');
 					});

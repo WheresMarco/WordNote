@@ -1,13 +1,13 @@
 # WordNote
 
-Is your head filled with ideas but your memory bad. No worries, with the WordNote plugin for WordPress you can easily write down your ideas in the admin dashboard area so you will be reminded every time you log in.
+Your head filled with ideas but your memory bad? No worries! With WordNote for WordPress you can easily write down your ideas in the Admin Dashboard so you will be reminded every time you log in.
 
-## Features:
+## Features
 *  Simple to use with jQuery
 *  Uses wp_options for saving
 *  No settings page (yep, that's a feature)
 
-## Changelog:
+## Changelog
 ### 2.0
 Rewrite of the plugin to make it more future.
 *  Ajax - no more page-reload.
@@ -20,9 +20,10 @@ Rewrite of the plugin to make it more future.
 *  You can now post code without WordNote screwing it up
 
 ## Installation
+### Easy install
+Search for the plugin on your WordPress-install and click install. Grab a cup of coffee.
 
-Simple install:
-
+### Hard install
 1. Upload the "WordNote" folder to the "/wp-content/plugins/" directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Done!

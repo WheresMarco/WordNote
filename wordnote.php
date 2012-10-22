@@ -10,20 +10,16 @@ Author URI: http://wheresmar.co
 
 // If get POST by the plugin
 if ($_POST['note']) {
-	include_once $_SERVER['DOCUMENT_ROOT'] . '/wordnote/wp-load.php'; // Riktigt fult!
-
+	require_once('../../../wp-config.php');
 	update_option("wordnote", htmlentities($_POST['note'], ENT_QUOTES, 'UTF-8'));
-
 	die();
 } else {
 
-	// Create the function to output the contents of our Dashboard Widget
+	// Create the function to output the form as a Dashboard Widget
 	function wordnote_dashboard_widget_function() {
-		// Display form
-
 		echo "<div id=\"wordnote\">\n";
-		echo "<textarea name=\"note\" id=\"note\" style=\"width: 100%; height: 100px\">".get_option("wordnote", "Leave a note. You won't regret it?")."</textarea><br />\n";
-		echo "<a href=\"#\" value=\"Save\" id=\"wordnote-submit\" class=\"button\" style=\"float: right;\" />Save</a><br />\n";
+		echo "<textarea name=\"note\" id=\"note\" style=\"width: 100%; height: 100px\">".get_option("wordnote", "Leave a note.")."</textarea><br />\n";
+		echo "<button value=\"Save\" id=\"wordnote-submit\" class=\"button\" style=\"float: right;\" />Save</button><br />\n";
 		echo "</div>\n";
 	} 
 
@@ -34,14 +30,12 @@ if ($_POST['note']) {
 
 	// JavaScript for the form on the dashboard
 	function wordnote_javascript() {
-	    ?>
-	    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> <!-- FULHAXXX! Leta efter bättre lösning -->
-	    <script type="text/javascript">
+	?>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript">
 	    	$(document).ready(function(){
 	    		$("#wordnote-submit").click(function() {
 	    			var note = $("#note").val();
-
-	    			event.preventDefault(); 
 	    			$("#wordnote-submit").html('Saving...');
 
 	    			$.ajax({
@@ -54,7 +48,7 @@ if ($_POST['note']) {
 				});
 	    	});
 	    </script>
-	    <?php
+	<?php
 	}
 
 	// Hook into WordPress-header on dashboard for JavaScript & hook into the 'wp_dashboard_setup' action to register the form function

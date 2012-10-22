@@ -1,10 +1,9 @@
 === WordNote ===
-Contributors: HaildGamer
+Contributors: WheresMarco
 Tags: admin, widget, notes, wordnote, code, memory
 Requires at least: 2.7
-Tested up to: 2.7.1
-Stable tag: 1.1
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3689633
+Tested up to: 3.4.2
+Stable tag: 2.0
 
 Simple way to make notes on the WordPress admin dashboard.
 

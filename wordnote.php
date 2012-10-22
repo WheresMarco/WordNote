@@ -8,16 +8,11 @@ Author: Marco Hyyryläinen
 Author URI: http://wheresmar.co
 */
 
-// If get Post
-if ($_POST) {
-	$path = $_SERVER['DOCUMENT_ROOT'];
-	include_once $path . '/wordnote/wp-config.php';
-	include_once $path . '/wordnote/wp-load.php';
-	include_once $path . '/wordnote/wp-includes/wp-db.php';
-	include_once $path . '/wordnote/wp-includes/pluggable.php';
-	
-	$text = $_POST['note'];
-	update_option("wordnote", $text);
+// If get POST by the plugin
+if ($_POST['note']) {
+	include_once $_SERVER['DOCUMENT_ROOT'] . '/wordnote/wp-load.php'; // Riktigt fult!
+
+	update_option("wordnote", htmlentities($_POST['note'], ENT_QUOTES, 'UTF-8'));
 
 	die();
 } else {
@@ -62,10 +57,8 @@ if ($_POST) {
 	    <?php
 	}
 
-	// Hook into WordPress-header on dashboard for JavaScript
+	// Hook into WordPress-header on dashboard for JavaScript & hook into the 'wp_dashboard_setup' action to register the form function
 	add_action('admin_footer-index.php', 'wordnote_javascript');
-
-	// Hook into the 'wp_dashboard_setup' action to register the form function
 	add_action('wp_dashboard_setup', 'wordnote_add_dashboard_widgets' );
 }
 ?>

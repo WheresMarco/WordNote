@@ -7,46 +7,24 @@ Version: 2.0
 Author: Marco Hyyryläinen
 Author URI: http://wheresmar.co
 */
+
+// If get Post
+if ($_POST) {
+
+	$text = $_POST['note'];
+	add_option("wordnote", $text);
+
+	die();
+}
 		
 // Create the function to output the contents of our Dashboard Widget
 function wordnote_dashboard_widget_function() {
-	
-	// Define path to textfile.txt
-	$path_to_textfile = WP_PLUGIN_DIR . '/wordnote/textfile.txt';
-	
-	// Create textfile.txt if it doesn´t exist
-	if (file_exists($path_to_textfile)) { } else {        
-    	$open_file = fopen($path_to_textfile, "w");
-		$write = fwrite($open_file, "Welcome to WordNote! \n/Marco - CodeMonkey.nu");
-		fclose($open_file);
-	}   
-	
-	// If ?edit=wordnote is called
-	if ($_GET['edit'] == "wordnote") {
-		
-		// Save to textfile.txt
-		$open_file = fopen($path_to_textfile, "w");
-		$write = fwrite($open_file, stripslashes($_POST['note']));
-		fclose($open_file);
+	// Display form
 
-		// Hack to redirect to /wp-admin/index.php
-		echo "<script language=\"javascript\" type=\"text/JavaScript\">window.location=\"index.php\"</script>\n";
-		
-	// If not, display form	
-	} else {
-		
-		// Load textfile.txt
-		$text = file_get_contents($path_to_textfile);
-
-		// Display form
-		echo "<form name=\"form\" method=\"post\" action=\"?edit=wordnote\">\n";
-		echo "<textarea name=\"note\" style=\"width: 100%; height: 100px\">".$text."</textarea><br />\n";
-		echo "<input type=\"submit\" name=\"save\" value=\"Save\" class=\"button\" style=\"float: right;\" /><br />\n";
-		echo "</form>\n";
-		
-		// Unset $text (textfile.txt)
-		unset($text);
-	}
+	echo "<div id=\"wordnote\">\n";
+	echo "<textarea name=\"note\" style=\"width: 100%; height: 100px\">".get_option("wordnote", "Leave a note. You won't regret it?")."</textarea><br />\n";
+	echo "<a href=\"#\" value=\"Save\" id=\"wordnote-submit\" class=\"button\" style=\"float: right;\" />Save</a><br />\n";
+	echo "</div>\n";
 } 
 
 // Create the function use in the action hook
@@ -54,6 +32,30 @@ function wordnote_add_dashboard_widgets() {
 	wp_add_dashboard_widget('wordnote_dashboard_widget', 'WordNote', 'wordnote_dashboard_widget_function');	
 } 
 
-// Hoook into the 'wp_dashboard_setup' action to register our other functions
+// JavaScript for the form on the dashboard
+function wordnote_javascript() {
+    ?>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> <!-- FULHAXXX! Leta efter bättre lösning -->
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$("#wordnote-submit").click(function() {
+    			$.ajax({
+					type: "POST",
+					url: "/WordNote/wp-content/plugins/wordnote/wordnote.php",
+					data: { note: "John" }
+				}).done(function( msg ) {
+					alert( "Data Saved: " + msg );
+				});
+
+			});
+    	});
+    </script>
+    <?php
+}
+
+// Hook into WordPress-header on dashboard for JavaScript
+add_action('admin_footer-index.php', 'wordnote_javascript');
+
+// Hook into the 'wp_dashboard_setup' action to register the form function
 add_action('wp_dashboard_setup', 'wordnote_add_dashboard_widgets' );
 ?>

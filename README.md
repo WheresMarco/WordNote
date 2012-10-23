@@ -22,9 +22,6 @@ Rewrite of the plugin to make it more future.
 *  You can now post code without WordNote screwing it up
 
 ## Installation
-### Easy install
-Search for the plugin on your WordPress-install and click install. Grab a cup of coffee.
-
 ### Hard install
 1. Upload the "WordNote" folder to the "/wp-content/plugins/" directory
 2. Activate the plugin through the 'Plugins' menu in WordPress

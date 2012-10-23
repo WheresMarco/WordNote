@@ -33,10 +33,7 @@ Rewrite of the plugin to make it more future.<br />
 BACKUP YOUR NOTES BEFORE UPDATING!</b>
 
 == Installation ==
-Easy install:
-Search for the plugin on your WordPress-install and click install. Grab a cup of coffee.
-
-Simple install:
+Hard install:
 1. Upload the `WordNote` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Done!

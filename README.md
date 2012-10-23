@@ -2,6 +2,8 @@
 
 Your head filled with ideas but your memory bad? No worries! With WordNote for WordPress you can easily write down your ideas in the Admin Dashboard so you will be reminded every time you log in.
 
+![Screenshot](https://raw.github.com/WheresMarco/WordNote/master/screenshot-1.jpg)
+
 ## Features
 *  Simple to use with jQuery
 *  Uses wp_options for saving
